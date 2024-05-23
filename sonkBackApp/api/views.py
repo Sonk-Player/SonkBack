@@ -4,7 +4,7 @@ from rest_framework.request import Request
 from rest_framework import status
 import ytmusicapi
 from .filters import  filters
-
+from pytube import YouTube
 
 ytmusicapi = ytmusicapi.YTMusic()
 
@@ -30,6 +30,20 @@ class SearchMusic(APIView):
             else:
                 data = ytmusicapi.search(name,limit=limit)  
                 
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetArtist(APIView):
+    
+    def get(self,request: Request):
+        
+        search = request.query_params
+        print(search)
+        chanelId = search.get('chanelId')
+        try: 
+            data = ytmusicapi.get_artist(channelId=chanelId)
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
