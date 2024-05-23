@@ -5,6 +5,7 @@ from rest_framework import status
 import ytmusicapi
 from .filters import  filters
 
+
 ytmusicapi = ytmusicapi.YTMusic()
 
 # Create your views here.
