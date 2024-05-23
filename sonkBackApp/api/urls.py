@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ShearchMusic
+from .views import SearchMusic
 
 urlpatterns = [
-    path('search/', ShearchMusic.as_view(), name='search'),
+    path('search/', SearchMusic.as_view(), name='search'),
 ]

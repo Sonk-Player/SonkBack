@@ -3,7 +3,6 @@
 
 # INIT PROJECT 
 
-
 #### - Tener instaldo python se puede desde la microsft store 
 #### - Iniciar entorno virtual py -m venv sonkBack
 #### - Activar el entorno virtual  sonkBack\Scripts\activate.bat
