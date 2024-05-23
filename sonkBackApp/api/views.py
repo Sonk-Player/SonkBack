@@ -7,6 +7,7 @@ import ytmusicapi
 ytmusicapi = ytmusicapi.YTMusic()
 
 # Create your views here.
+#Path: search?name=????
 class ShearchMusic(APIView):
     
     
@@ -19,4 +20,4 @@ class ShearchMusic(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
     
-    
+
