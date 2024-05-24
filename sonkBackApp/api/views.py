@@ -34,7 +34,7 @@ class SearchMusic(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-# Path: artist?chanelId=?????
+
 class GetArtist(APIView):
     
     def get(self,request: Request):
@@ -49,7 +49,6 @@ class GetArtist(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-# Path: song?songId=????
 class GetSong(APIView):
     
     
@@ -59,26 +58,12 @@ class GetSong(APIView):
         print(search)
         songId = search.get('songId')
         
+        
         try: 
             data = ytmusicapi.get_song(songId)
             data = mapperSong(data) 
+         
 
             return Response(data, status=status.HTTP_200_OK, content_type='application/json')
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
-        
-# Path: getSuggestions?songId=????
-class GetSudggest(APIView):
-    
-    def get(self,request: Request):
-        
-        search = request.query_params
-       
-        name = search.get('name')
-        
-        try: 
-            data  = ytmusicapi.search(name,filter='songs',limit=4,)
-            return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
