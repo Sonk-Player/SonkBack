@@ -10,6 +10,7 @@
 #### - Instalar ytMusic pip install ytmusicapi pytube
 #### - Instalar rest_framework pip3 install djangorestframework
 #### - Instalar cors  pip install django-cors-headers
+#### - Instalar cors  pip install django-model-utils   
 #### - Ejecucion py .\sonkBackApp\manage.py runserver
 
 # CREACION DE UN SUPER USUARIO (OPTIONAL)
