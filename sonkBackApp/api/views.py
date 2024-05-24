@@ -69,3 +69,14 @@ class GetSong(APIView):
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
         
+
+# Path: getSuggestions?songId=????
+class GetSudggest(APIView):
+    def get(self,request: Request):
+        search = request.query_params
+        name = search.get('name')
+        try:             
+            data  = ytmusicapi.search(name,filter='songs',limit=4,)           
+            return Response(data, status=status.HTTP_200_OK)       
+        except Exception as e:            
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
