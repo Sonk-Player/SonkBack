@@ -1,0 +1,5 @@
+pytube
+ytmusicapi
+djangorestframework
+django-cors-headers
+django-model-utils
