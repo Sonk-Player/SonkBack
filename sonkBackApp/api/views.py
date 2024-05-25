@@ -18,8 +18,8 @@ class SearchMusic(APIView):
         
         search = request.query_params
         print(search)
-        name = search.get('name')
-        limit = search.get('limit')
+        query = search.get('query')
+        page = search.get('page')
        
         filters = search.get('filter')
 
@@ -27,9 +27,10 @@ class SearchMusic(APIView):
         try: 
             if(filterCategory.verfiyFilters(filters)==True):
                 print(filters)
-                data = ytmusicapi.search(query=name, filter=filters)
+                data = ytmusicapi.search(query=query+'&' + page, filter=filters)
             else:
-                data = ytmusicapi.search(name)  
+                data = ytmusicapi.search(query=query +'&' + page) 
+
                 
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
@@ -41,9 +42,9 @@ class GetArtist(APIView):
     def get(self,request: Request):
         
         search = request.query_params
-        print(search)
         chanelId = unquote(search.get('chanelId'))
-        try: 
+        try:
+           
             data = ytmusicapi.get_artist(channelId=chanelId)
            
             return Response(data, status=status.HTTP_200_OK)
@@ -63,7 +64,8 @@ class GetSong(APIView):
         try: 
             data = ytmusicapi.get_song(songId)
             data = mapperSong(data) 
-        
+
+
             return Response(data, status=status.HTTP_200_OK, content_type='application/json')
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -75,13 +77,12 @@ class GetSudggest(APIView):
     def get(self,request: Request):
         search = request.query_params
         name = search.get('name')
-        songId = unquote(search.get('songId')) 
-        print(name)
-        print(songId)
+        songId = search.get('songId')
+      
         try:             
             
-            data  = ytmusicapi.search(name,filter='songs', limit=5)      
-
+            data  = ytmusicapi.search(name,filter='songs')      
+            
             newData = []
             for i in range(len(data)):  
                 if data[i]["videoId"] != songId:
@@ -90,4 +91,31 @@ class GetSudggest(APIView):
             return Response(newData, status=status.HTTP_200_OK)
         except Exception as e:            
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-    
+
+# Path: top?limit=????
+class GetTopSongs(APIView):
+    def get(self,request: Request):
+        search = request.query_params
+        print(search)
+        limit = search.get('limit')
+        try: 
+            if(limit == None):
+                data = ytmusicapi.search(query='top songs', filter='songs', limit=50)
+            else:
+                data = ytmusicapi.search(query='top songs', filter='songs', limit=int(limit))
+
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
+class GetPlaylistTop(APIView):
+    def get(self,request: Request):
+        search = request.query_params
+        playlistId = search.get('playlistId')
+        try: 
+            data = ytmusicapi.search(query='top', filter='playlists')
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
