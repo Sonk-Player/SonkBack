@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SearchMusic,GetArtist,GetSong,GetSudggest,GetTopSongs,GetPlaylistTop,SearchMusicWithPage
+from .views import SearchMusic,GetArtist,GetSong,GetSudggest,GetTopSongs,GetPlaylistTop,SearchMusicWithPage,GetMoodCategories
 
 urlpatterns = [
     path('search/', SearchMusic().as_view(), name='search'),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('song/',GetSong.as_view(),name='song'),
     path('getSuggestions/',GetSudggest.as_view(),name='suggestions'),
     path('top/',GetTopSongs.as_view(),name='topSongs'),
-    path('playlist/top',GetPlaylistTop.as_view(),name='topPlaylist')
+    path('playlist/top',GetPlaylistTop.as_view(),name='topPlaylist'),
+    path('moodCategories',GetMoodCategories.as_view(),name='moodCategories'),
 ]

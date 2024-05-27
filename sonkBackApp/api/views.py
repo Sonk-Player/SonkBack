@@ -142,3 +142,15 @@ class GetPlaylistTop(APIView):
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+        
+class GetMoodCategories(APIView):
+    
+    def get(self,request: Request):
+        try:
+            data = ytmusicapi.get_mood_categories()
+            return Response(data, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
