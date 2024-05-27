@@ -58,11 +58,12 @@ class GetSong(APIView):
         
         search = request.query_params
         print(search)
-        songId = unquote(search.get('songId')) 
-        
+        songId = search.get('songId')
+        print(songId)
         
         try: 
             data = ytmusicapi.get_song(songId)
+
             data = mapperSong(data) 
 
 

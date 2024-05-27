@@ -11,6 +11,8 @@ def mapperSong(data):
         "thumbnails" : data["videoDetails"]["thumbnail"]["thumbnails"],
         "durationSeconds": data["videoDetails"]["lengthSeconds"],
         "viewCount": data["videoDetails"]["viewCount"],
+        "urlEmbedded": data["microformat"]["microformatDataRenderer"]["urlCanonical"],
+        "description": data["microformat"]["microformatDataRenderer"]["description"]
         }
         
     return song
