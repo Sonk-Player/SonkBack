@@ -13,6 +13,29 @@ ytmusicapi = ytmusicapi.YTMusic()
 #Path: search?name=????
 class SearchMusic(APIView):
     
+    def get(self,request: Request):
+        
+        search = request.query_params
+        print(search)
+        query = search.get('query')
+       
+        filters = search.get('filter')
+
+        try: 
+            if(filterCategory.verfiyFilters(filters)==True):
+            
+                data = ytmusicapi.search(query=query, filter=filters)
+            else:
+                data = ytmusicapi.search(query=query) 
+
+                
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+class SearchMusicWithPage(APIView):
+    
     
     def get(self,request: Request):
         
@@ -20,7 +43,6 @@ class SearchMusic(APIView):
         print(search)
         query = search.get('query')
         page = search.get('page')
-       
         filters = search.get('filter')
 
         print(filterCategory.verfiyFilters(filters))
