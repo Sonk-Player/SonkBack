@@ -154,3 +154,16 @@ class GetMoodCategories(APIView):
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class GetAutoComplete(APIView):
+    
+    def get(self,request: Request):
+        search = request.query_params
+        query = search.get('query')
+        try:
+            data = ytmusicapi.get_search_suggestions(query)
+            return Response(data, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
