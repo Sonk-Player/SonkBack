@@ -138,7 +138,7 @@ class GetPlaylistTop(APIView):
         search = request.query_params
         playlistId = search.get('playlistId')
         try: 
-            data = ytmusicapi.search(query='top', filter='playlists')
+            data = ytmusicapi.get_search_suggestions(query='Top mundial', filter='playlists')
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
