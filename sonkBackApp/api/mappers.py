@@ -13,7 +13,7 @@ def mapperSong(data):
         "viewCount": data["videoDetails"]["viewCount"],
         "urlEmbedded": "https://www.youtube.com/embed/"+data["videoDetails"]["videoId"],
         "description": data["microformat"]["microformatDataRenderer"]["description"],
-        "resultType": data["resultType"]
+        
         }
         
     return song
