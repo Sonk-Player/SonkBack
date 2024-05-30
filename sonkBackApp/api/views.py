@@ -205,7 +205,7 @@ class GetPosdscats(APIView):
             search = request.query_params
             query = search.get('query')
             try:
-                data = ytmusicapi.search(query=query , limit=100, filter='playlists')
+                data = ytmusicapi.search(query=query , limit=100, filter='community_playlists')
                 newData=[]
                 for item in data:
                     if item["resultType"] != 'song':
