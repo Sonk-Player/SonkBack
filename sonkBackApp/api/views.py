@@ -68,8 +68,13 @@ class GetArtist(APIView):
         try:
            
             data = ytmusicapi.get_artist(channelId=chanelId)
+            newData= []
+            for item in data: 
+                if item["resultType"] != 'song':
+                  newData.append(item)
+                    
            
-            return Response(data, status=status.HTTP_200_OK)
+            return Response(newData, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -191,3 +196,21 @@ class Status(APIView):
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class GetPosdscats(APIView):
+        
+        def get(self,request: Request):
+            
+            search = request.query_params
+            query = search.get('query')
+            try:
+                data = ytmusicapi.search(query=query , limit=100)
+                
+                newData = []
+            
+                        
+                return Response(data, status=status.HTTP_200_OK)
+            
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

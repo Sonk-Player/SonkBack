@@ -13,4 +13,5 @@ urlpatterns = [
     path('autoComplete',GetAutoComplete.as_view(),name='autoComplete'),
     path('playlist',GetPlaylist.as_view(),name='playlist'),
     path('status',Status.as_view(),name='status'),
+    path('posdcast',GetPosdscats.as_view(),name='podcast'),
 ]
