@@ -212,3 +212,15 @@ class GetPosdscats(APIView):
             
             except Exception as e:
                 return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class GetByMood(APIView):
+    def get(self,request: Request):
+        search = request.query_params
+        mood = search.get('mood')
+        try:
+            data = ytmusicapi.get_mood_playlists(params=mood)
+            return Response(data, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
