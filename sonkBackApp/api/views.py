@@ -9,6 +9,7 @@ from .mappers import mapperSong
 from urllib.parse import unquote
 from ytmusicapi.parsers._utils import (nav, NAVIGATION_BROWSE_ID, SECTION_LIST, SINGLE_COLUMN_TAB, TITLE_TEXT, GRID_ITEMS,CATEGORY_PARAMS,CAROUSEL_CONTENTS)
 from ytmusicapi.parsers.browsing import parse_playlist, parse_content_list
+
 ytmusicapi = ytmusicapi.YTMusic()
 
 # Create your views here.
@@ -227,19 +228,23 @@ class GetByMood(APIView):
             respose = ytmusicapi._send_request("browse", {"browseId": "FEmusic_moods_and_genres_category", "params": mood})
             
             for section in nav(respose, SINGLE_COLUMN_TAB + SECTION_LIST):
-                path = []
-                if "gridRenderer" in section:
-                    path = GRID_ITEMS
-                elif "musicCarouselShelfRenderer" in section:
-                    path = CAROUSEL_CONTENTS
-                elif "musicImmersiveCarouselShelfRenderer" in section:
-                    path = ["musicImmersiveCarouselShelfRenderer", "contents"]
-                if len(path):
-                    results = nav(section, path)
-                    playlists += parse_content_list(results, parse_playlist)
+                try:
+                    path = []
                     
-            
-            
+                    if "gridRenderer" in section:
+                        path = GRID_ITEMS
+                    elif "musicCarouselShelfRenderer" in section:
+                        path = CAROUSEL_CONTENTS
+                    elif "musicImmersiveCarouselShelfRenderer" in section:
+                        path = ["musicImmersiveCarouselShelfRenderer", "contents"]
+                    if len(path):
+                        results = nav(section, path)
+                        playlists += parse_content_list(results, parse_playlist)
+                except Exception as e:
+                    print(e)
+                    pass
+
+
             return Response(playlists, status=status.HTTP_200_OK)
         
         except Exception as e:
