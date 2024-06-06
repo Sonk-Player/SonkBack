@@ -142,7 +142,7 @@ class GetPlaylistTop(APIView):
         search = request.query_params
         playlistId = search.get('playlistId')
         try: 
-            data = ytmusicapi.get_search_suggestions(query='Top mundial', filter='playlists')
+            data = ytmusicapi.get_search_suggestions(query='Top mundial', filter='playlists', limit=100)
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -209,7 +209,6 @@ class GetPosdscats(APIView):
                 for item in data:
                     if item["resultType"] == 'podcast':
                         newData.append(item)    
-            
 
                 return Response(newData, status=status.HTTP_200_OK)
             
@@ -260,4 +259,4 @@ class GetAlbum(APIView):
         
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
+
