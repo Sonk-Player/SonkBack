@@ -13,3 +13,6 @@ sonkBackApp/sonkBackApp/__pycache__/__init__.cpython-311.pyc
 sonkBackApp/sonkBackApp/__pycache__/settings.cpython-311.pyc
 sonkBackApp/sonkBackApp/__pycache__/urls.cpython-311.pyc
 sonkBackApp/sonkBackApp/__pycache__/wsgi.cpython-311.pyc
+sonkBackApp/api/__pycache__/urls.cpython-312.pyc
+sonkBackApp/api/__pycache__
+*.pyc

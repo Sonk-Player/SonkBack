@@ -15,4 +15,6 @@ urlpatterns = [
     path('status',Status.as_view(),name='status'),
     path('posdcast',GetPosdscats.as_view(),name='podcast'),
     path('searchByMood',GetByMood.as_view(),name='searchByMood'),
-]
+    path('album', GetAlbum.as_view(), name='album'),
+    
+    ]
