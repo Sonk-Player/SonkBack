@@ -204,10 +204,10 @@ class GetPosdscats(APIView):
             search = request.query_params
             query = search.get('query')
             try:
-                data = ytmusicapi.search(query=' type | podscast | page : 2' , limit=100)
+                data = ytmusicapi.search(query='podcasts' , filter='podcasts')
                 newData=[]
                 for item in data:
-                    if item["resultType"] != 'song':
+                    if item["resultType"] == 'podcast':
                         newData.append(item)    
             
 
