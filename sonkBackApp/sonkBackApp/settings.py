@@ -77,7 +77,8 @@ TEMPLATES = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
     "https://sonk.netlify.app",
-    "https://sonkback-production.up.railway.app"
+    # "https://sonkback-production.up.railway.app"
+    "https://sonkbackpython.onrender.com"
 ]
 
 WSGI_APPLICATION = 'sonkBackApp.wsgi.application'
